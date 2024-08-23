@@ -1,0 +1,25 @@
+---
+import { dump, themes } from '@poppinss/dumper/html'
+import type { HTMLFormatterConfig } from '@poppinss/dumper/html/types'
+
+interface Props {
+  config?: Omit<HTMLFormatterConfig, 'styles' | 'head'>
+  theme?: keyof typeof themes | Exclude<HTMLFormatterConfig['styles'], undefined>
+  [key: string]: any
+}
+
+const knownProps = ['config', 'theme']
+const key = Object.keys(Astro.props).find((k) => !knownProps.includes(k))!;
+const value = Astro.props[key];
+
+/**
+ * Merging defaults with the user provided config
+ */
+const styles = typeof Astro.props.theme === 'string' 
+  ? themes[Astro.props.theme]
+  : Astro.props.theme
+const head = { title: `DUMP "${key}"` }
+
+const config = { ...Astro.props.config, styles, head }
+---
+<Fragment set:html={dump(value, config)}></Fragment>

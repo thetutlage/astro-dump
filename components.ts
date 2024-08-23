@@ -1,0 +1,1 @@
+export { default as Dump } from "./src/Dump.astro"

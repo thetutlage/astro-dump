@@ -1,7 +1,7 @@
 {
   "name": "astro-dump",
   "description": "Better Debug component for Astro built on top of poppinss/dumper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "files": [
     "src",

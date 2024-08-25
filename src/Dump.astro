@@ -15,11 +15,34 @@ const value = Astro.props[key];
 /**
  * Merging defaults with the user provided config
  */
-const styles = typeof Astro.props.theme === 'string' 
+const styles = typeof Astro.props.theme === 'string'
   ? themes[Astro.props.theme]
   : Astro.props.theme
 const head = { title: `DUMP "${key}"` }
 
 const config = { ...Astro.props.config, styles, head }
 ---
-<Fragment set:html={dump(value, config)}></Fragment>
+<div>
+  <div class="astro-dump-header">
+    <span class="astro-dump-header-title">DUMP</span>
+    <span>"{key}"</span>
+  </div>
+  <Fragment set:html={dump(value, config)}></Fragment>
+</div>
+
+<style>
+  .astro-dump-header {
+    font-family: JetBrains Mono, monaspace argon, Menlo, Monaco, Consolas, monospace;
+    background: #ff1639;
+    border-radius: 4px;
+    color: #fff;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0.4rem 1.2rem;
+    font-size: 1em;
+  }
+  .astro-dump-header .astro-dump-header-title {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+</style>
